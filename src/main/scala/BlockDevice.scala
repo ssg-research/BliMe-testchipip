@@ -126,7 +126,7 @@ class BlockDeviceTrackerModule(outer: BlockDeviceTracker)
   val (tl, edge) = outer.node.out(0)
   val req = Reg(new BlockDeviceFrontendRequest)
 
-  require (tl.a.bits.data.getWidth == dataBitsPerBeat)
+  require (tl.a.bits.data.getWidth == dataBitsPerBeat*9/8) // should truncate higher order bits; TODO check if it has any unexpected side effects
   require (edge.manager.minLatency > 0)
 
   val (s_idle :: s_bdev_req :: s_bdev_read_data ::
