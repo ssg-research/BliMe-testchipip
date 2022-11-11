@@ -1,6 +1,8 @@
 #ifndef __TESTCHIP_TSI_H
 #define __TESTCHIP_TSI_H
 
+#include <stdexcept>
+
 #include <fesvr/tsi.h>
 #include <fesvr/htif.h>
 
@@ -18,6 +20,7 @@ class testchip_tsi_t : public tsi_t
     tsi_t::load_program();
     is_loadmem = false;
   }
+  void idle() { switch_to_target(); }
 
  protected:
   virtual void load_mem_write(addr_t taddr, size_t nbytes, const void* src) { };
